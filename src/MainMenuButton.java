@@ -5,7 +5,7 @@ import javax.swing.JButton;
 /**
  * Seperate class for the buttons on the main menu.
  */
-public class MainMenuButton extends JButton{
+public class MainMenuButton extends JButton {
     /**
      * Constructor that expexts the dimentions of the button and the text that it will display.
      */
@@ -14,12 +14,5 @@ public class MainMenuButton extends JButton{
         this.setText(text);
         this.setBackground(Color.GREEN);
         this.setVisible(true);
-    }
-
-    /**
-     * Method that allows other classes to change the lacation of the button.
-     */
-    public void moveTo(int x, int y) {
-        this.setLocation(x, y);
     }
 }
