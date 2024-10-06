@@ -14,5 +14,7 @@ public class MainMenuButton extends JButton {
         this.setText(text);
         this.setBackground(color);
         this.setVisible(true);
+        this.setOpaque(true);
+        this.setBorderPainted(false);
     }
 }
