@@ -19,7 +19,7 @@ public class StartMenu extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         JPanel mainPanel = new JPanel();
-        mainPanel.setSize(new Dimension(width, height));
+        mainPanel.setSize(width, height);
         mainPanel.setBackground(Color.BLACK);
         mainPanel.setLayout(null);
         this.add(mainPanel);
