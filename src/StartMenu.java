@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
@@ -49,7 +48,8 @@ public class StartMenu extends JFrame {
         exitButton.setLocation(buttonStartX, buttonStartY + (buttonHeight * 2));
 
         playButton.addActionListener((ActionEvent e) -> {
-            System.out.println("You clicked the PLAY button");
+            this.dispose();
+            new GameScreen(800, 1000).setVisible(true);
         }); 
         htpButton.addActionListener((ActionEvent e) -> {
             System.out.println("Use W A S D to move, don't hit the obstacles");
