@@ -30,9 +30,15 @@ public class StartMenu extends JFrame {
         int buttonStartX = (width - buttonWidth) / 2;
         int buttonStartY = (height - (buttonHeight / 9)) / 2;
         
-        MainMenuButton playButton = new MainMenuButton(buttonWidth, buttonHeight, Color.RED, "PLAY");
-        MainMenuButton htpButton = new MainMenuButton(buttonWidth, buttonHeight, Color.GREEN, "HOW TO PLAY?");
-        MainMenuButton exitButton = new MainMenuButton(buttonWidth, buttonHeight, Color.BLUE, "EXIT");
+        MainMenuButton playButton = new MainMenuButton(
+            buttonWidth, buttonHeight, Color.RED, "PLAY"
+            );
+        MainMenuButton htpButton = new MainMenuButton(
+            buttonWidth, buttonHeight, Color.GREEN, "HOW TO PLAY?"
+            );
+        MainMenuButton exitButton = new MainMenuButton(
+            buttonWidth, buttonHeight, Color.BLUE, "EXIT"
+            );
 
         mainPanel.add(playButton);
         mainPanel.add(htpButton);
