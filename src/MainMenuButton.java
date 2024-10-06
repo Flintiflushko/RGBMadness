@@ -9,10 +9,10 @@ public class MainMenuButton extends JButton {
     /**
      * Constructor that expexts the dimentions of the button and the text that it will display.
      */
-    public MainMenuButton(int width, int height, String text) {
+    public MainMenuButton(int width, int height, Color color, String text) {
         this.setSize(new Dimension(width, height));
         this.setText(text);
-        this.setBackground(Color.GREEN);
+        this.setBackground(color);
         this.setVisible(true);
     }
 }
