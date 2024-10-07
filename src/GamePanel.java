@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
 
-    private ArrayList<VisibleObject> thingsToDisplay = new ArrayList<>();
+    private final ArrayList<VisibleObject> thingsToDisplay = new ArrayList<>();
 
     /**
     * Constructor that takes in an ArrayList of visible objects 

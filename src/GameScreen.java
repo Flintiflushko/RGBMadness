@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -6,7 +8,7 @@ import javax.swing.JPanel;
 /**
  * Class that generates the window for the main game.
  */
-public class GameScreen extends JFrame {
+public class GameScreen extends JFrame implements KeyListener {
 
     private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
 
@@ -24,6 +26,7 @@ public class GameScreen extends JFrame {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.addKeyListener(this);
         
         playingField.setSize(width, 9 * height / 10);
         playingField.setLayout(null);
@@ -61,5 +64,29 @@ public class GameScreen extends JFrame {
         } catch (InterruptedException e) {
             System.out.print("Something went wrong while playing the game!");
         }
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case 40 -> System.out.println("Down");
+            case 39 -> System.out.println("Rigth");
+            case 38 -> System.out.println("Up");
+            case 37 -> System.out.println("Left");
+            default -> System.out.println("Nothing interestg pressed");
+            
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        //Ignore this method.
+        //Use keyPressed() instead.
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        //Ignore this method.
+        //Use keyPressed() instead.
     }
 }
