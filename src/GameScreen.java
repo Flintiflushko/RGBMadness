@@ -12,8 +12,7 @@ public class GameScreen extends JFrame implements KeyListener {
 
     private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
 
-    /**
-     * A methood that sets up the window in which the game will be played.
+    /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
      * to make the initial look of the window.
      */
@@ -46,16 +45,26 @@ public class GameScreen extends JFrame implements KeyListener {
     /**
      * A methood that initiates the actuall game.
      */
-    private void playGame(JPanel playingField) throws InterruptedException {
-
+    private void playGame(GamePanel playingField) throws InterruptedException {
+        while (true) { 
+            Thread.sleep(500);
+            for (VisibleObject vo : this.thingsToDraw) {
+                vo.setTime(vo.getTime() - 1);
+                vo.correctColor();
+                if (vo.getTime() == 0) {
+                    thingsToDraw.remove(vo);
+                }
+            }
+            playingField = new GamePanel(thingsToDraw);
+        }
     }
 
 
-    /**
-     * Constructor for the start menu.
+    /**Constructor for the start menu.
      */
     public GameScreen(int width, int height) {
-        this.thingsToDraw.add(new VisibleObject(width / 2, height / 2, 40, 40, Color.WHITE));
+        this.thingsToDraw.add(new VisibleObject(
+            width / 2 - 20, height / 2 - 20, 40, 40, Color.RED, 1));
         GamePanel playingField = new GamePanel(this.thingsToDraw);
         JPanel textField = new JPanel();
         setUp(width, height, playingField, textField);
@@ -73,8 +82,7 @@ public class GameScreen extends JFrame implements KeyListener {
             case 39 -> System.out.println("Rigth");
             case 38 -> System.out.println("Up");
             case 37 -> System.out.println("Left");
-            default -> System.out.println("Nothing interestg pressed");
-            
+            default -> System.out.println(e.getKeyCode());
         }
     }
 
