@@ -11,14 +11,17 @@ import javax.swing.JPanel;
 public class GameScreen extends JFrame implements KeyListener {
 
     private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
+    private int difficulty = 1;
+    private int score = 0;
+    private GamePanel playingField = new GamePanel(this.thingsToDraw);
+    private JPanel textField = new JPanel();
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
      * to make the initial look of the window.
      */
     private void setUp(
-        int width, int height, JPanel playingField, JPanel textField) {
-        
+        int width, int height) {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
@@ -27,35 +30,39 @@ public class GameScreen extends JFrame implements KeyListener {
         this.setResizable(false);
         this.addKeyListener(this);
         
-        playingField.setSize(width, 9 * height / 10);
-        playingField.setLayout(null);
-        playingField.setVisible(true);
+        this.playingField.setSize(width, 9 * height / 10);
+        this.playingField.setLayout(null);
+        this.playingField.setVisible(true);
         this.add(playingField);
-        playingField.setLocation(0, height / 10);
+        this.playingField.setLocation(0, height / 10);
 
-        textField.setSize(width, height / 10);
-        textField.setBackground(Color.GRAY);
-        textField.setLayout(null);
-        textField.setVisible(true);
+        this.textField.setSize(width, height / 10);
+        this.textField.setBackground(Color.GRAY);
+        this.textField.setLayout(null);
+        this.textField.setVisible(true);
         this.add(textField);
-        textField.setLocation(0, 0);
-
+        this.textField.setLocation(0, 0);
     }
 
     /**
-     * A methood that initiates the actuall game.
+     * A methood that initiates the actual game.
      */
-    private void playGame(GamePanel playingField) throws InterruptedException {
-        while (true) { 
-            Thread.sleep(500);
+    private void playGame() throws InterruptedException {
+        for (int i = 0; i < 90; i++) { 
+            this.revalidate();
+            Thread.sleep(16);
+            //If the obsticalse are less then the dificulty number add another obstacle.
+            if (thingsToDraw.size() <= difficulty) {
+                thingsToDraw.add(new VisibleObject(1, 1, 1, 1, Color.BLUE, 60)); //TODO
+            }
             for (VisibleObject vo : this.thingsToDraw) {
                 vo.setTime(vo.getTime() - 1);
-                vo.correctColor();
-                if (vo.getTime() == 0) {
+                vo.correctState();
+                if (vo.getState() == 0) {
                     thingsToDraw.remove(vo);
-                }
+                    score++;
+                } 
             }
-            playingField = new GamePanel(thingsToDraw);
         }
     }
 
@@ -65,11 +72,9 @@ public class GameScreen extends JFrame implements KeyListener {
     public GameScreen(int width, int height) {
         this.thingsToDraw.add(new VisibleObject(
             width / 2 - 20, height / 2 - 20, 40, 40, Color.RED, 1));
-        GamePanel playingField = new GamePanel(this.thingsToDraw);
-        JPanel textField = new JPanel();
-        setUp(width, height, playingField, textField);
+        setUp(width, height);
         try {
-            playGame(playingField);
+            playGame();
         } catch (InterruptedException e) {
             System.out.print("Something went wrong while playing the game!");
         }
@@ -98,3 +103,11 @@ public class GameScreen extends JFrame implements KeyListener {
         //Use keyPressed() instead.
     }
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ * https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/event/KeyListener.html
+ * https://docs.oracle.com/javase/8/docs/api/?java/util/ArrayList.html
+ * https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html
+ * https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html
+ */

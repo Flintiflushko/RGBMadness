@@ -59,3 +59,7 @@ public class StartMenu extends JFrame {
         });
     }
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ */

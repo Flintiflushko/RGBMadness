@@ -41,3 +41,8 @@ public class GamePanel extends JPanel {
     }
     
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ * https://docs.oracle.com/javase/8/docs/api/?java/util/ArrayList.html
+ */
