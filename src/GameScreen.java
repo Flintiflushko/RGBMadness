@@ -1,20 +1,21 @@
 import java.awt.Color;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  * Class that generates the window for the main game.
  */
-public class GameScreen extends JFrame implements KeyListener {
+public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
     private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
-    private int difficulty = 1;
-    private int score = 0;
-    private GamePanel playingField = new GamePanel(this.thingsToDraw);
-    private JPanel textField = new JPanel();
+    private int difficulty;
+    private int score;
+    private GamePanel playingField;
+    private JPanel textArea;
+    private final Timer timer;
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
@@ -22,6 +23,11 @@ public class GameScreen extends JFrame implements KeyListener {
      */
     private void setUp(
         int width, int height) {
+        this.playingField = new GamePanel(this.thingsToDraw);
+        this.textArea = new JPanel();
+        this.difficulty = 1;
+        this.score = 0;
+        
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
@@ -36,48 +42,38 @@ public class GameScreen extends JFrame implements KeyListener {
         this.add(playingField);
         this.playingField.setLocation(0, height / 10);
 
-        this.textField.setSize(width, height / 10);
-        this.textField.setBackground(Color.GRAY);
-        this.textField.setLayout(null);
-        this.textField.setVisible(true);
-        this.add(textField);
-        this.textField.setLocation(0, 0);
+        this.textArea.setSize(width, height / 10);
+        this.textArea.setBackground(Color.GRAY);
+        this.textArea.setLayout(null);
+        this.textArea.setVisible(true);
+        this.add(textArea);
+        this.textArea.setLocation(0, 0);
     }
 
     /**
      * A methood that initiates the actual game.
      */
-    private void playGame() throws InterruptedException {
-        for (int i = 0; i < 90; i++) { 
-            this.revalidate();
-            Thread.sleep(16);
-            //If the obsticalse are less then the dificulty number add another obstacle.
-            if (thingsToDraw.size() <= difficulty) {
-                thingsToDraw.add(new VisibleObject(1, 1, 1, 1, Color.BLUE, 60)); //TODO
-            }
-            for (VisibleObject vo : this.thingsToDraw) {
-                vo.setTime(vo.getTime() - 1);
-                vo.correctState();
-                if (vo.getState() == 0) {
-                    thingsToDraw.remove(vo);
-                    score++;
-                } 
-            }
+    private void gameLoop() {
+        System.out.println("Looped gameloop");
+        if (thingsToDraw.size() <= difficulty) {
+            thingsToDraw.add(new VisibleObject(100, 
+                100, 
+                100, 
+                100, 
+                new Color(255, 255, 255, 255), 
+                 180));
         }
+        this.playingField = new GamePanel(thingsToDraw);
+        this.playingField.repaint();
     }
 
 
     /**Constructor for the start menu.
      */
     public GameScreen(int width, int height) {
-        this.thingsToDraw.add(new VisibleObject(
-            width / 2 - 20, height / 2 - 20, 40, 40, Color.RED, 1));
         setUp(width, height);
-        try {
-            playGame();
-        } catch (InterruptedException e) {
-            System.out.print("Something went wrong while playing the game!");
-        }
+        timer = new Timer(500, this);
+        timer.start();
     }
     
     @Override
@@ -101,6 +97,11 @@ public class GameScreen extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
         //Ignore this method.
         //Use keyPressed() instead.
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        gameLoop();
     }
 }
 

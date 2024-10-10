@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
      * Overriding the paint method as mentioned in the class description.
      */
     @Override
-    public void paint(Graphics grafix) {
+    public void paintComponent(Graphics grafix) {
         Graphics2D grafix2d = (Graphics2D) grafix;
 
         grafix2d.setPaint(Color.black);
