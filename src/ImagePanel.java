@@ -9,10 +9,10 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(int buttonStartY) {
         this.setBackground(Color.WHITE);
-        this.setBounds((Main.width - imageWidth) / 2, (buttonStartY - imageHeight) / 2, 300, 200);
+        this.setBounds((700 - imageWidth) / 2, (buttonStartY - imageHeight) / 2, 300, 200);
         this.setVisible(true);
         this.setOpaque(true);
-        image = new ImageIcon("src\\assets\\vfx\\RGBMTS.jpg").getImage();
+        image = new ImageIcon("src/assets/vfx/RGBMTS.jpg").getImage();
     }
 
     public void paint(Graphics g) {
