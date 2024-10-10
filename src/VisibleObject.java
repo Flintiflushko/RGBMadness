@@ -33,7 +33,7 @@ public class VisibleObject {
         this.height = height;
         this.color = color;
         this.time = time;
-        this.state = 2;
+        this.state = 3;
     }
 
     /**
@@ -50,11 +50,11 @@ public class VisibleObject {
                 this.color.getRed(),
                 this.color.getGreen(), 
                 this.color.getBlue(),
-                 100);
+                 150);
             this.state = 3;
         } else if (this.time > 60) {
             // if there is 1 to 1.5 sec. before the object's time is up 
-            // it should blink in white and give out a sound effect.
+            // it should blink in white and give out a sound effect. TODO
             this.color = new Color(255, 255, 255, 255);
             this.state = 2;
         } else if (this.time > 0) {
@@ -62,8 +62,8 @@ public class VisibleObject {
             // it should become completely opaque.
             this.color = new Color(
                 this.color.getRed(),
-                this.color.getGreen(), 
-                this.color.getBlue(),
+                0,
+                0,
                  255);
             this.state = 1;
         } else {
