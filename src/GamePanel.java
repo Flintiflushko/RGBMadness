@@ -21,13 +21,28 @@ public class GamePanel extends JPanel {
         for (VisibleObject thingToAdd : thingsToDisplay) {
             this.thingsToDisplay.add(thingToAdd);
         }
+        this.setSize(800, 900);
+        this.setVisible(true);
+        this.setLocation(0, 100);
+        this.setLayout(null);
+    }
+
+    /**
+     * TODO. javadoc
+     */
+    public void redrawPanel(ArrayList<VisibleObject> thingsToDisplay) {
+        this.thingsToDisplay.clear();
+        for (VisibleObject thingToAdd : thingsToDisplay) {
+            this.thingsToDisplay.add(thingToAdd);
+        }
+        this.repaint();
     }
 
     /**
      * Overriding the paint method as mentioned in the class description.
      */
     @Override
-    public void paintComponent(Graphics grafix) {
+    public void paint(Graphics grafix) {
         Graphics2D grafix2d = (Graphics2D) grafix;
 
         grafix2d.setPaint(Color.black);

@@ -51,12 +51,12 @@ public class VisibleObject {
                 this.color.getGreen(), 
                 this.color.getBlue(),
                  100);
-            state = 3;
+            this.state = 3;
         } else if (this.time > 60) {
             // if there is 1 to 1.5 sec. before the object's time is up 
             // it should blink in white and give out a sound effect.
             this.color = new Color(255, 255, 255, 255);
-            state = 2;
+            this.state = 2;
         } else if (this.time > 0) {
             // if there is less than 1 sec before the object's time is up 
             // it should become completely opaque.
@@ -65,10 +65,10 @@ public class VisibleObject {
                 this.color.getGreen(), 
                 this.color.getBlue(),
                  255);
-            state = 1;
+            this.state = 1;
         } else {
             // if there is no time left then the object should be removed
-            state = 0;
+            this.state = 0;
         }
     }
 

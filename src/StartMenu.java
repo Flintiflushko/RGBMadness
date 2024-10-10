@@ -28,7 +28,7 @@ public class StartMenu extends JFrame {
         int buttonHeight = height / 10;
         int buttonStartX = (width - buttonWidth) / 2;
         int buttonStartY = (height - (buttonHeight / 9)) / 2;
-        
+
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
             );

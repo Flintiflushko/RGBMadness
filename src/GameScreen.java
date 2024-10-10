@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -10,12 +11,13 @@ import javax.swing.Timer;
  */
 public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
-    private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
+    private final ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
     private int difficulty;
     private int score;
     private GamePanel playingField;
     private JPanel textArea;
     private final Timer timer;
+    private Random random = new Random();
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
@@ -25,7 +27,6 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         int width, int height) {
         this.playingField = new GamePanel(this.thingsToDraw);
         this.textArea = new JPanel();
-        this.difficulty = 1;
         this.score = 0;
         
         this.setVisible(true);
@@ -35,12 +36,6 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.addKeyListener(this);
-        
-        this.playingField.setSize(width, 9 * height / 10);
-        this.playingField.setLayout(null);
-        this.playingField.setVisible(true);
-        this.add(playingField);
-        this.playingField.setLocation(0, height / 10);
 
         this.textArea.setSize(width, height / 10);
         this.textArea.setBackground(Color.GRAY);
@@ -48,23 +43,41 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.textArea.setVisible(true);
         this.add(textArea);
         this.textArea.setLocation(0, 0);
+
+        playingField = new GamePanel(thingsToDraw);
+        this.add(playingField);
     }
 
     /**
      * A methood that initiates the actual game.
      */
     private void gameLoop() {
-        System.out.println("Looped gameloop");
-        if (thingsToDraw.size() <= difficulty) {
-            thingsToDraw.add(new VisibleObject(100, 
-                100, 
-                100, 
-                100, 
-                new Color(255, 255, 255, 255), 
-                 180));
+        System.out.println(score);
+        difficulty = score / 15 + 1;
+        if (thingsToDraw.size() < this.difficulty) {
+            thingsToDraw.add(new VisibleObject(random.nextInt(700), 
+                random.nextInt(800), 
+                random.nextInt(100), 
+                random.nextInt(100), 
+                new Color(255, 255, 255), 
+                random.nextInt(100) + 90));
         }
-        this.playingField = new GamePanel(thingsToDraw);
-        this.playingField.repaint();
+
+        for (VisibleObject vo : this.thingsToDraw) {
+            vo.setTime(vo.getTime() - 1);
+            vo.correctState();
+            System.out.println(vo.getTime());
+            if (vo.getState() == 0) {
+                thingsToDraw.remove(vo);
+                score++;
+            }
+
+            //TODO check for collision here
+
+        }
+
+        
+        this.playingField.redrawPanel(thingsToDraw);
     }
 
 
@@ -72,7 +85,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      */
     public GameScreen(int width, int height) {
         setUp(width, height);
-        timer = new Timer(500, this);
+        timer = new Timer(16, this);
         timer.start();
     }
     
@@ -109,6 +122,5 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
  * Here are all the sources of information that were used while creating this class.
  * https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/event/KeyListener.html
  * https://docs.oracle.com/javase/8/docs/api/?java/util/ArrayList.html
- * https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html
  * https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html
  */
