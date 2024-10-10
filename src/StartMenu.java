@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
@@ -28,6 +29,10 @@ public class StartMenu extends JFrame {
         int buttonHeight = height / 10;
         int buttonStartX = (width - buttonWidth) / 2;
         int buttonStartY = (height - (buttonHeight / 9)) / 2;
+
+        ImagePanel image = new ImagePanel(buttonStartY);
+        mainPanel.add(image);
+        this.setVisible(true);
         
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
