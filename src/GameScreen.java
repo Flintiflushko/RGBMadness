@@ -12,6 +12,7 @@ import javax.swing.Timer;
 public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
     private ArrayList<DangerZone> thingsToDraw = new ArrayList<>();
+    private PlayerCharacter playerCharecter;
     private int difficulty;
     private int score;
     private GamePanel playingField;
@@ -23,9 +24,9 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      * The methood takes the width, height and 2 panels which it manipulates
      * to make the initial look of the window.
      */
-    private void setUp(
-        int width, int height) {
-        this.playingField = new GamePanel(this.thingsToDraw);
+    private void setUp(int width, int height) {
+        playerCharecter = new PlayerCharacter(width / 2, height / 2, 40);
+        this.playingField = new GamePanel(playerCharecter, this.thingsToDraw);
         this.textArea = new JPanel();
         this.score = 0;
         
@@ -44,7 +45,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.add(textArea);
         this.textArea.setLocation(0, 0);
 
-        playingField = new GamePanel(thingsToDraw);
+        playingField = new GamePanel(playerCharecter, thingsToDraw);
         this.add(playingField);
     }
 
@@ -63,22 +64,21 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
                 new Color(255, 0, 0),
                 240));
         }
-
         for (DangerZone dz : this.thingsToDraw) {
             dz.setTime(dz.getTime() - 1);
             dz.correctState();
             if (dz.getState() == 0) {
                 this.score++;
                 thingsToDraw = copyAllBut(thingsToDraw, dz);
-                if (this.thingsToDraw.isEmpty()) {
-                    break;
-                }
+            }
+            if (this.thingsToDraw.isEmpty()) {
+                break;
             }
 
             //TODO check for collision here
 
         }
-        this.playingField.redrawPanel(thingsToDraw);
+        this.playingField.redrawPanel(playerCharecter, thingsToDraw);
     }
 
     private ArrayList<DangerZone> copyAllBut(
@@ -105,15 +105,31 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 40) {
             System.out.println("Down");
+            playerCharecter.setY(playerCharecter.getY() + 10);
+            if (playerCharecter.getY() < 0) {
+                playerCharecter.setY(0);
+            }
         }
         if (e.getKeyCode() == 39) {
             System.out.println("Rigth");
+            playerCharecter.setX(playerCharecter.getX() + 10);
+            if (playerCharecter.getX() > this.getWidth()) {
+                playerCharecter.setX(this.getWidth());
+            }
         }
         if (e.getKeyCode() == 38) {
             System.out.println("Up");
+            playerCharecter.setY(playerCharecter.getY() - 10);
+            if (playerCharecter.getY() > this.getHeight()) {
+                playerCharecter.setY(0);
+            }
         }
         if (e.getKeyCode() == 37) {
             System.out.println("Left");
+            playerCharecter.setX(playerCharecter.getX() - 10);
+            if (playerCharecter.getX() < 0) {
+                playerCharecter.setX(0);
+            }
         }
         
     }

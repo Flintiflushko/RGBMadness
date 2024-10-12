@@ -1,7 +1,12 @@
 import java.awt.Color;
 import java.util.Random;
 
-public class DangerZone extends VisibleObject{
+/**
+ * Class fr the zones that the player must avoid.
+ * It extends the class visual object to get 
+ * its structure about the coordinate, size and color.
+ */
+public class DangerZone extends VisibleObject {
 
     private int time; //time is in frames; the game will run at ~60 FPS
     private int state; 
