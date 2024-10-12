@@ -11,10 +11,12 @@ import javax.swing.Timer;
  */
 public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
-    private ArrayList<DangerZone> thingsToDraw = new ArrayList<>();
+    private ArrayList<DangerZone> dangerZones = new ArrayList<>();
     private PlayerCharacter playerCharecter;
     private int difficulty;
     private int score;
+    private int speed;
+    private boolean gameInProgress;
     private GamePanel playingField;
     private JPanel textArea;
     private final Timer timer;
@@ -26,9 +28,11 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      */
     private void setUp(int width, int height) {
         playerCharecter = new PlayerCharacter(width / 2, height / 2, 40);
-        this.playingField = new GamePanel(playerCharecter, this.thingsToDraw);
+        this.playingField = new GamePanel(playerCharecter, this.dangerZones);
         this.textArea = new JPanel();
         this.score = 0;
+        this.speed = 7;
+        this.gameInProgress = true;
         
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +49,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.add(textArea);
         this.textArea.setLocation(0, 0);
 
-        playingField = new GamePanel(playerCharecter, thingsToDraw);
+        playingField = new GamePanel(playerCharecter, dangerZones);
         this.add(playingField);
     }
 
@@ -55,8 +59,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void gameLoop() {
         System.out.println(score);
         difficulty = score / 10 + 1;
-        if (thingsToDraw.size() < this.difficulty && thingsToDraw.size() < 4) {
-            thingsToDraw.add(new DangerZone(
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
+            dangerZones.add(new DangerZone(
                 random.nextInt(700), 
                 random.nextInt(800), 
                 random.nextInt(250) + 50, 
@@ -64,21 +68,23 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
                 new Color(255, 0, 0),
                 240));
         }
-        for (DangerZone dz : this.thingsToDraw) {
+        for (DangerZone dz : this.dangerZones) {
             dz.setTime(dz.getTime() - 1);
             dz.correctState();
             if (dz.getState() == 0) {
                 this.score++;
-                thingsToDraw = copyAllBut(thingsToDraw, dz);
+                dangerZones = copyAllBut(dangerZones, dz);
             }
-            if (this.thingsToDraw.isEmpty()) {
+            if (this.dangerZones.isEmpty()) {
                 break;
             }
 
-            //TODO check for collision here
+            if (!playerCharecter.noCollision(dangerZones)) {
+                this.gameInProgress = false;
+            }
 
         }
-        this.playingField.redrawPanel(playerCharecter, thingsToDraw);
+        this.playingField.redrawPanel(playerCharecter, dangerZones);
     }
 
     private ArrayList<DangerZone> copyAllBut(
@@ -105,28 +111,28 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 40) {
             System.out.println("Down");
-            playerCharecter.setY(playerCharecter.getY() + 10);
+            playerCharecter.setY(playerCharecter.getY() + this.speed);
             if (playerCharecter.getY() < 0) {
                 playerCharecter.setY(0);
             }
         }
         if (e.getKeyCode() == 39) {
             System.out.println("Rigth");
-            playerCharecter.setX(playerCharecter.getX() + 10);
+            playerCharecter.setX(playerCharecter.getX() + this.speed);
             if (playerCharecter.getX() > this.getWidth()) {
                 playerCharecter.setX(this.getWidth());
             }
         }
         if (e.getKeyCode() == 38) {
             System.out.println("Up");
-            playerCharecter.setY(playerCharecter.getY() - 10);
+            playerCharecter.setY(playerCharecter.getY() - this.speed);
             if (playerCharecter.getY() > this.getHeight()) {
                 playerCharecter.setY(0);
             }
         }
         if (e.getKeyCode() == 37) {
             System.out.println("Left");
-            playerCharecter.setX(playerCharecter.getX() - 10);
+            playerCharecter.setX(playerCharecter.getX() - this.speed);
             if (playerCharecter.getX() < 0) {
                 playerCharecter.setX(0);
             }
@@ -148,7 +154,13 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        gameLoop();
+        if (gameInProgress) {
+            gameLoop();
+        } else {
+            this.timer.stop();
+            this.dispose();
+            new StartMenu(700, 900).setVisible(true);
+        }
     }
 }
 
@@ -157,5 +169,5 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
  * https://docs.oracle.com/javase/8/docs/api/index.html?java/awt/event/KeyListener.html
  * https://docs.oracle.com/javase/8/docs/api/?java/util/ArrayList.html
  * https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html
- * https://www.geeksforgeeks.org/iterators-in-java/
+ * https://www.gamedev.net/forums/topic/348728-java-smooth-keyboard-input/
  */
