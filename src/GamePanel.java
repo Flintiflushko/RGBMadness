@@ -11,14 +11,14 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel {
 
-    private final ArrayList<VisibleObject> thingsToDisplay = new ArrayList<>();
+    private final ArrayList<DangerZone> thingsToDisplay = new ArrayList<>();
 
     /**
     * Constructor that takes in an ArrayList of visible objects 
     * and copies it to the class's private field. 
     */
-    public GamePanel(ArrayList<VisibleObject> thingsToDisplay) {
-        for (VisibleObject thingToAdd : thingsToDisplay) {
+    public GamePanel(ArrayList<DangerZone> thingsToDisplay) {
+        for (DangerZone thingToAdd : thingsToDisplay) {
             this.thingsToDisplay.add(thingToAdd);
         }
         this.setSize(800, 900);
@@ -30,9 +30,9 @@ public class GamePanel extends JPanel {
     /**
      * TODO. javadoc
      */
-    public void redrawPanel(ArrayList<VisibleObject> thingsToDisplay) {
+    public void redrawPanel(ArrayList<DangerZone> thingsToDraw) {
         this.thingsToDisplay.clear();
-        for (VisibleObject thingToAdd : thingsToDisplay) {
+        for (DangerZone thingToAdd : thingsToDraw) {
             this.thingsToDisplay.add(thingToAdd);
         }
         this.repaint();

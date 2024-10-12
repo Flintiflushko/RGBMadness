@@ -5,19 +5,12 @@ import java.awt.Color;
  * information of everything that will be drawn on the game panel.
  */
 public class VisibleObject {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private Color color;
-    private int time; //time is in frames; the game will run at ~60 FPS
-    private int state; 
-    /* state corresponds to what should happen with the object
-     * 3 - location indication with transparent color
-     * 2 - blinking white and letting out a sound effect
-     * 1 - active
-     * 0 - to be removed
-     */
+    protected int x;
+    protected int y;
+    protected int width;
+    protected int height;
+    protected Color color;
+    
     
     
 
@@ -26,51 +19,15 @@ public class VisibleObject {
      * for the start of the visible object that will be painted on the game panel
      * as well as its width, height and color.
      */
-    public VisibleObject(int x, int y, int width, int height, Color color, int time) {
+    public VisibleObject(int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
-        this.time = time;
-        this.state = 3;
     }
 
-    /**
-     * Method that checks how much time the object has left 
-     * and assigns it the correct color.
-     * When an visible object is close to dissapearing it 
-     * will blink in white and then become "ACTIVE".
-     */
-    public void correctState() {
-        if (this.time > 90) {
-            // if there is more then 1.5 sec. before the object's time is up
-            // it should be somewhat transparent.
-            this.color = new Color(
-                this.color.getRed(),
-                this.color.getGreen(), 
-                this.color.getBlue(),
-                 150);
-            this.state = 3;
-        } else if (this.time > 60) {
-            // if there is 1 to 1.5 sec. before the object's time is up 
-            // it should blink in white and give out a sound effect. TODO
-            this.color = new Color(255, 255, 255, 255);
-            this.state = 2;
-        } else if (this.time > 0) {
-            // if there is less than 1 sec before the object's time is up 
-            // it should become completely opaque.
-            this.color = new Color(
-                this.color.getRed(),
-                0,
-                0,
-                 255);
-            this.state = 1;
-        } else {
-            // if there is no time left then the object should be removed
-            this.state = 0;
-        }
-    }
+    
 
     /**
     * The rest of the file is just getters and setters 
@@ -97,10 +54,6 @@ public class VisibleObject {
         this.color = color;
     }
 
-    public void setTime(int time) {
-        this.time = time; 
-    }
-
     // Getters
     public int getX() {
         return this.x;
@@ -122,13 +75,6 @@ public class VisibleObject {
         return this.color;
     }
 
-    public int getTime() {
-        return this.time;
-    }
-
-    public int getState() {
-        return this.state;
-    }
 }
 
 

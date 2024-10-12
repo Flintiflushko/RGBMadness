@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +11,7 @@ import javax.swing.Timer;
  */
 public class GameScreen extends JFrame implements KeyListener, ActionListener {
 
-    private ArrayList<VisibleObject> thingsToDraw = new ArrayList<>();
-    private final Iterator<VisibleObject> iterator = thingsToDraw.iterator();
+    private ArrayList<DangerZone> thingsToDraw = new ArrayList<>();
     private int difficulty;
     private int score;
     private GamePanel playingField;
@@ -56,23 +54,22 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void gameLoop() {
         System.out.println(score);
         difficulty = score / 10 + 1;
-        if (thingsToDraw.size() < this.difficulty && thingsToDraw.size() < 5) {
-            thingsToDraw.add(new VisibleObject(
+        if (thingsToDraw.size() < this.difficulty && thingsToDraw.size() < 4) {
+            thingsToDraw.add(new DangerZone(
                 random.nextInt(700), 
                 random.nextInt(800), 
                 random.nextInt(250) + 50, 
                 random.nextInt(250) + 50, 
-                new Color(255, 0, 0), 
-                random.nextInt(140) + 120));
+                new Color(255, 0, 0),
+                240));
         }
 
-        for (VisibleObject vo : this.thingsToDraw) {
-            vo.setTime(vo.getTime() - 1);
-            vo.correctState();
-            if (vo.getState() == 0) {
+        for (DangerZone dz : this.thingsToDraw) {
+            dz.setTime(dz.getTime() - 1);
+            dz.correctState();
+            if (dz.getState() == 0) {
                 this.score++;
-                thingsToDraw = copyAllBut(thingsToDraw, vo);
-                
+                thingsToDraw = copyAllBut(thingsToDraw, dz);
                 if (this.thingsToDraw.isEmpty()) {
                     break;
                 }
@@ -81,16 +78,14 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             //TODO check for collision here
 
         }
-
-        
         this.playingField.redrawPanel(thingsToDraw);
     }
 
-    private ArrayList<VisibleObject> copyAllBut(
-        ArrayList<VisibleObject> toCopy, 
+    private ArrayList<DangerZone> copyAllBut(
+        ArrayList<DangerZone> toCopy, 
         VisibleObject thingNotToCopy) {
-        ArrayList<VisibleObject> newAL = new ArrayList<>();
-        for (VisibleObject vo : toCopy) {
+        ArrayList<DangerZone> newAL = new ArrayList<>();
+        for (DangerZone vo : toCopy) {
             if (!vo.equals(thingNotToCopy)) {
                 newAL.add(vo);
             }
