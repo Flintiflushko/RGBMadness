@@ -24,7 +24,7 @@ public class GamePanel extends JPanel {
         }
         this.playerCharacter = playerCharacter;
         this.thingsToDisplay.add(playerCharacter);
-        this.setSize(800, 900);
+        this.setSize(800, 875);
         this.setVisible(true);
         this.setLocation(0, 100);
         this.setLayout(null);

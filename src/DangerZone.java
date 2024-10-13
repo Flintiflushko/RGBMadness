@@ -40,7 +40,7 @@ public class DangerZone extends VisibleObject {
                 color.getRed(),
                 color.getGreen(), 
                 color.getBlue(),
-                 150);
+                 100);
             this.state = 3;
         } else if (this.time > 60) {
             // if there is 1 to 1.5 sec. before the object's time is up 

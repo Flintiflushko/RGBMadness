@@ -17,14 +17,14 @@ public class PlayerCharacter extends VisibleObject{
      */
     public boolean noCollision(ArrayList<DangerZone> dangerzones) {
         for (DangerZone dz : dangerzones) {
-            if (!(dz.getState() == 1) 
+            if (!(!(dz.getState() == 1) 
                 || (this.x + this.width < dz.getX()
                 || this.x > dz.getX() + dz.getWidth()
                 || this.y + this.height < dz.getY()
-                || this.y > dz.getY() + dz.getHeight())) {
-                return true;
-            }
+                || this.y > dz.getY() + dz.getHeight()))) {
+                return false;
+            } 
         }
-        return false;
+        return true;
     }
 }

@@ -63,8 +63,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             dangerZones.add(new DangerZone(
                 random.nextInt(700), 
                 random.nextInt(800), 
-                random.nextInt(250) + 50, 
-                random.nextInt(250) + 50, 
+                random.nextInt(400) + 50, 
+                random.nextInt(400) + 50, 
                 new Color(255, 0, 0),
                 240));
         }
@@ -110,28 +110,28 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 40) {
-            System.out.println("Down");
+            //Down
             playerCharecter.setY(playerCharecter.getY() + this.speed);
+            if (playerCharecter.getY() + playerCharecter.getHeight() > playingField.getHeight()) {
+                playerCharecter.setY(playingField.getHeight() - playerCharecter.getHeight());
+            }
+        }
+        if (e.getKeyCode() == 39) {
+            //Rigth
+            playerCharecter.setX(playerCharecter.getX() + this.speed);
+            if (playerCharecter.getX() + playerCharecter.getWidth() > playingField.getWidth()) {
+                playerCharecter.setX(playingField.getWidth() - playerCharecter.getWidth());
+            }
+        }
+        if (e.getKeyCode() == 38) {
+            //"Up"
+            playerCharecter.setY(playerCharecter.getY() - this.speed);
             if (playerCharecter.getY() < 0) {
                 playerCharecter.setY(0);
             }
         }
-        if (e.getKeyCode() == 39) {
-            System.out.println("Rigth");
-            playerCharecter.setX(playerCharecter.getX() + this.speed);
-            if (playerCharecter.getX() > this.getWidth()) {
-                playerCharecter.setX(this.getWidth());
-            }
-        }
-        if (e.getKeyCode() == 38) {
-            System.out.println("Up");
-            playerCharecter.setY(playerCharecter.getY() - this.speed);
-            if (playerCharecter.getY() > this.getHeight()) {
-                playerCharecter.setY(0);
-            }
-        }
         if (e.getKeyCode() == 37) {
-            System.out.println("Left");
+            //Left
             playerCharecter.setX(playerCharecter.getX() - this.speed);
             if (playerCharecter.getX() < 0) {
                 playerCharecter.setX(0);
