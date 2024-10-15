@@ -11,13 +11,14 @@ public class StartMenu extends JFrame {
     /**
      * Constructor for the start menu.
      */
+    static JPanel mainPanel = new JPanel();
     public StartMenu(int width, int height) {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        JPanel mainPanel = new JPanel();
+        //Changed location of panel 
         mainPanel.setSize(width, height);
         mainPanel.setBackground(Color.BLACK);
         mainPanel.setLayout(null);
@@ -31,7 +32,7 @@ public class StartMenu extends JFrame {
 
         ImagePanel image = new ImagePanel(buttonStartY);
         mainPanel.add(image);
-
+		
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
             );
@@ -55,7 +56,7 @@ public class StartMenu extends JFrame {
             new GameScreen(800, 1000).setVisible(true);
         }); 
         htpButton.addActionListener((ActionEvent e) -> {
-            System.out.println("Use W A S D to move, don't hit the obstacles");
+            HowToPlayMenu menu = new HowToPlayMenu();
         });
         exitButton.addActionListener((ActionEvent e) -> {
             this.dispose();
