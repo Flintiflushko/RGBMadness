@@ -8,10 +8,12 @@ import javax.swing.*;
 * starting menu of the game.
 */
 public class StartMenu extends JFrame {
+    
+    static JPanel mainPanel = new JPanel();
+
     /**
      * Constructor for the start menu.
      */
-    static JPanel mainPanel = new JPanel();
     public StartMenu(int width, int height) {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +34,7 @@ public class StartMenu extends JFrame {
 
         ImagePanel image = new ImagePanel(buttonStartY);
         mainPanel.add(image);
-		
+
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
             );

@@ -2,10 +2,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class ImagePanel extends JPanel {
-    int imageWidth = 300;
-    int imageHeight = 200;
-    Image image;
-
+    private int imageWidth = 300;
+    private int imageHeight = 200;
+    private Image image;
+ 
     public ImagePanel(int buttonStartY) {
         this.setBackground(Color.WHITE);
         this.setBounds((700 - imageWidth) / 2, (buttonStartY - imageHeight) / 2, 300, 200);

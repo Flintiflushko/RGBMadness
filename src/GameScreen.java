@@ -159,7 +159,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         } else {
             this.timer.stop();
             this.dispose();
-            new StartMenu(700, 900).setVisible(true);
+            new EndScreen().setVisible(true);
         }
     }
 }
