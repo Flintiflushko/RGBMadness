@@ -5,11 +5,14 @@ import java.awt.Color;
  * information of everything that will be drawn on the game panel.
  */
 public class VisibleObject {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private Color color;
+    protected int x;
+    protected int y;
+    protected int width;
+    protected int height;
+    protected Color color;
+    
+    
+    
 
     /**
      * Constructor for general use that takes in the x and y coordinate
@@ -24,10 +27,13 @@ public class VisibleObject {
         this.color = color;
     }
 
+    
+
     /**
     * The rest of the file is just getters and setters 
     * for the private fields of the class.
     */
+    // Setters
     public void setX(int x) {
         this.x = x;
     }
@@ -48,6 +54,7 @@ public class VisibleObject {
         this.color = color;
     }
 
+    // Getters
     public int getX() {
         return this.x;
     }
@@ -67,4 +74,11 @@ public class VisibleObject {
     public Color getColor() {
         return this.color;
     }
+
 }
+
+
+ /* 
+ * Here are all the sources of information that were used while creating this class.
+ * https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/java/awt/Color.html
+ */
