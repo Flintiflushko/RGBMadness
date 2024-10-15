@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
@@ -26,10 +27,13 @@ public class HowToPlayMenu extends JFrame {
         // this.setVisible(true);
 
         JLabel label = new JLabel();
-        label.setText("<html>Instructions:<br>- Use wasd to move.<br>- Avoid obstacles to earn points.</html>");
+        label.setText("<html><dive style = 'text-align: center;'>" + "<font color='red'>Use wasd to move.</font><br>"
+            + "<font color='green'>Avoid obstacles to earn points.</font></html>");
+        label.setFont(new Font("Sans Serif", Font.BOLD, 24));
         label.setForeground(Color.white);
-        label.setBackground(Color.RED);
+        label.setBackground(Color.BLACK);
         label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
         label.setOpaque(true);
 
         JButton closeButton = new JButton("Close");

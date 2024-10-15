@@ -33,7 +33,6 @@ public class StartMenu extends JFrame {
 
         ImagePanel image = new ImagePanel(buttonStartY);
         mainPanel.add(image);
-        this.setVisible(true);
         
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
