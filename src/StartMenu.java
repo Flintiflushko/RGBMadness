@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
@@ -33,7 +32,7 @@ public class StartMenu extends JFrame {
 
         ImagePanel image = new ImagePanel(buttonStartY);
         mainPanel.add(image);
-        
+		
         MainMenuButton playButton = new MainMenuButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
             );
@@ -64,3 +63,7 @@ public class StartMenu extends JFrame {
         });
     }
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ */

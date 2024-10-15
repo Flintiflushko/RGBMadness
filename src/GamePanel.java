@@ -12,15 +12,34 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 
     private final ArrayList<VisibleObject> thingsToDisplay = new ArrayList<>();
+    private final PlayerCharacter playerCharacter;
 
     /**
     * Constructor that takes in an ArrayList of visible objects 
     * and copies it to the class's private field. 
     */
-    public GamePanel(ArrayList<VisibleObject> thingsToDisplay) {
-        for (VisibleObject thingToAdd : thingsToDisplay) {
+    public GamePanel(PlayerCharacter playerCharacter, ArrayList<DangerZone> thingsToDisplay) {
+        for (DangerZone thingToAdd : thingsToDisplay) {
             this.thingsToDisplay.add(thingToAdd);
         }
+        this.playerCharacter = playerCharacter;
+        this.thingsToDisplay.add(playerCharacter);
+        this.setSize(800, 875);
+        this.setVisible(true);
+        this.setLocation(0, 100);
+        this.setLayout(null);
+    }
+
+    /**
+     * Void Method used to "refresh" the panel.
+     */
+    public void redrawPanel(PlayerCharacter playerCharecter, ArrayList<DangerZone> thingsToDraw) {
+        this.thingsToDisplay.clear();
+        this.thingsToDisplay.add(playerCharacter);
+        for (DangerZone thingToAdd : thingsToDraw) {
+            this.thingsToDisplay.add(thingToAdd);
+        }
+        this.repaint();
     }
 
     /**
@@ -41,3 +60,8 @@ public class GamePanel extends JPanel {
     }
     
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ * https://docs.oracle.com/javase/8/docs/api/?java/util/ArrayList.html
+ */

@@ -17,3 +17,7 @@ public class MainMenuButton extends JButton {
         this.setBorderPainted(false);
     }
 }
+
+/* 
+ * Here are all the sources of information that were used while creating this class.
+ */
