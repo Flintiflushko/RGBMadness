@@ -1,51 +1,49 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-
-
-
 
 public class HowToPlayMenu extends JFrame {
 
     int dialogWidth = 500;
-    int dialogHeight = 400;
+    int dialogHeight = 150;
 
     HowToPlayMenu () {
         this.getContentPane().setBackground(Color.BLACK);
 
         this.setSize(dialogWidth, dialogHeight);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
-        // JPanel panel = new JPanel();
-        // panel.setSize(dialogWidth, dialogHeight);
-        // panel.setBackground(Color.BLACK);
-        // panel.setLayout(null);
-        // panel.setOpaque(true);
-        // this.add(panel);
-        // this.setVisible(true);
 
         JLabel label = new JLabel();
-        label.setText("<html><dive style = 'text-align: center;'>" + "<font color='red'>Use wasd to move.</font><br>"
+        label.setText("<html><dive style = 'text-align: center;'>"
+            + "<font color='red'>Use wasd to move.</font><br>"
             + "<font color='green'>Avoid obstacles to earn points.</font></html>");
         label.setFont(new Font("Sans Serif", Font.BOLD, 24));
-        label.setForeground(Color.white);
+        label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);
         label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setVerticalAlignment(JLabel.CENTER);
-        label.setOpaque(true);
 
-        JButton closeButton = new JButton("Close");
+        ImageIcon closeIcon = new ImageIcon("src/assets/vfx/exitIcon.jpg");
+        
+        JButton closeButton = new JButton();
+        
+        closeButton.setPreferredSize(new Dimension(60, 60));
+        closeButton.setMaximumSize(new Dimension(60, 60));
+        closeButton.setBorderPainted(false);
+        // closeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // closeButton.setIcon(closeIcon);
+        if (closeIcon.getIconWidth() > 0) {
+            closeButton.setIcon(closeIcon);
+        } else {
+            closeButton.setText("Close");  // Fallback if the image doesn't load
+        }
+
         closeButton.addActionListener((ActionEvent e) -> {
             this.dispose();
         }); 
         
-
-        this.add(label, BorderLayout.NORTH);
-        this.revalidate();
-        label.setLocation(200, 200);
-        this.add(closeButton, BorderLayout.SOUTH);
+        this.add(closeButton);
+        this.add(label);
         this.setVisible(true);
 
         this.setLocationRelativeTo(StartMenu.mainPanel);
