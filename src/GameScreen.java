@@ -22,6 +22,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private final Timer timer;
     private final Random random = new Random();
     private boolean[] inputs;
+    private MovementController moveControl = new MovementController();
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
@@ -35,8 +36,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.speed = 5;
         this.gameInProgress = true;
         this.inputs = new boolean[] {false, false, false, false};
-
-        
+   
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
@@ -85,7 +85,11 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
                 this.gameInProgress = false;
             }
         }
-        movePlayer(inputs);
+        moveControl.movePlayer(
+            this.inputs, 
+            this.speed, 
+            this.playerCharecter,
+            this.playingField);
         this.playingField.redrawPanel(playerCharecter, dangerZones);
     }
 
@@ -109,46 +113,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         timer.start();
     }
     
-    @Override
-    public void keyPressed(KeyEvent e) {
-        //Ignore this method.
-    }
-
-    private void movePlayer (boolean[] keysPressed) {
-        if (keysPressed[0]) {
-            //"Up"
-            System.out.println("UP");
-            playerCharecter.setY(playerCharecter.getY() - this.speed);
-            if (playerCharecter.getY() < 0) {
-                playerCharecter.setY(0);
-            }
-        }
-        if (keysPressed[1]) {
-            //Left
-            System.out.println("LEFT");
-            playerCharecter.setX(playerCharecter.getX() - this.speed);
-            if (playerCharecter.getX() < 0) {
-                playerCharecter.setX(0);
-            }
-        }
-        if (keysPressed[2]) {
-            //Down
-            System.out.println("DOWN");
-            playerCharecter.setY(playerCharecter.getY() + this.speed);
-            if (playerCharecter.getY() + playerCharecter.getHeight() > playingField.getHeight()) {
-                playerCharecter.setY(playingField.getHeight() - playerCharecter.getHeight());
-            }
-        }
-        if (keysPressed[3]) {
-            //Rigth
-            System.out.println("RIGTH");
-            playerCharecter.setX(playerCharecter.getX() + this.speed);
-            if (playerCharecter.getX() + playerCharecter.getWidth() > playingField.getWidth()) {
-                playerCharecter.setX(playingField.getWidth() - playerCharecter.getWidth());
-            }
-        }
-        
-    }
+    
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -168,8 +133,11 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             case 's' -> this.inputs[2] = false;
             case 'd' -> this.inputs[3] = false;     
         }
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
         //Ignore this method.
-        //Use keyPressed() instead.
     }
 
     @Override
