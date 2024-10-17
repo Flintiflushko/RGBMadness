@@ -21,6 +21,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private JPanel textArea;
     private final Timer timer;
     private final Random random = new Random();
+    private boolean[] inputs;
+    private MovementController moveControl = new MovementController();
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
@@ -31,9 +33,10 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
         this.textArea = new JPanel();
         this.score = 0;
-        this.speed = 7;
+        this.speed = 5;
         this.gameInProgress = true;
-        
+        this.inputs = new boolean[] {false, false, false, false};
+   
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
@@ -78,12 +81,15 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             if (this.dangerZones.isEmpty()) {
                 break;
             }
-
             if (!playerCharecter.noCollision(dangerZones)) {
                 this.gameInProgress = false;
             }
-
         }
+        moveControl.movePlayer(
+            this.inputs, 
+            this.speed, 
+            this.playerCharecter,
+            this.playingField);
         this.playingField.redrawPanel(playerCharecter, dangerZones);
     }
 
@@ -107,49 +113,31 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         timer.start();
     }
     
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 40) {
-            //Down
-            playerCharecter.setY(playerCharecter.getY() + this.speed);
-            if (playerCharecter.getY() + playerCharecter.getHeight() > playingField.getHeight()) {
-                playerCharecter.setY(playingField.getHeight() - playerCharecter.getHeight());
-            }
-        }
-        if (e.getKeyCode() == 39) {
-            //Rigth
-            playerCharecter.setX(playerCharecter.getX() + this.speed);
-            if (playerCharecter.getX() + playerCharecter.getWidth() > playingField.getWidth()) {
-                playerCharecter.setX(playingField.getWidth() - playerCharecter.getWidth());
-            }
-        }
-        if (e.getKeyCode() == 38) {
-            //"Up"
-            playerCharecter.setY(playerCharecter.getY() - this.speed);
-            if (playerCharecter.getY() < 0) {
-                playerCharecter.setY(0);
-            }
-        }
-        if (e.getKeyCode() == 37) {
-            //Left
-            playerCharecter.setX(playerCharecter.getX() - this.speed);
-            if (playerCharecter.getX() < 0) {
-                playerCharecter.setX(0);
-            }
-        }
-        
-    }
+    
 
     @Override
     public void keyTyped(KeyEvent e) {
-        //Ignore this method.
-        //Use keyPressed() instead.
+        switch (e.getKeyChar()) {
+            case 'w' -> this.inputs[0] = true;
+            case 'a' -> this.inputs[1] = true;
+            case 's' -> this.inputs[2] = true;
+            case 'd' -> this.inputs[3] = true;
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        switch (e.getKeyChar()) {
+            case 'w' -> this.inputs[0] = false;
+            case 'a' -> this.inputs[1] = false;
+            case 's' -> this.inputs[2] = false;
+            case 'd' -> this.inputs[3] = false;     
+        }
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {
         //Ignore this method.
-        //Use keyPressed() instead.
     }
 
     @Override
