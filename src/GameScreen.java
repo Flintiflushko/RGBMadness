@@ -37,7 +37,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
         this.textArea = new JPanel();
         this.score = 0;
-        this.speed = 5;
+        this.speed = 7;
         this.gameInProgress = true;
         this.inputs = new boolean[] {false, false, false, false};
    
@@ -90,8 +90,13 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     }
 
     private void callDangerZones() {
-        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
-            dangerZones.add(new DZRed());
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 5) {
+            switch (random.nextInt(4)) {
+                case 0 -> dangerZones.add(new DZRed());
+                case 1 -> dangerZones.add(new DZBlue(playerCharecter));
+                case 2 -> dangerZones.add(new DZGreen());
+                case 3 -> dangerZones.add(new DZPurple());
+            }
         }
     }
 
@@ -111,7 +116,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      */
     public GameScreen(int width, int height) {
         setUp(width, height);
-        timer = new Timer(16, this);
+        timer = new Timer(13, this);
         timer.start();
     }
     
