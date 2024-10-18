@@ -66,15 +66,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void gameLoop() {
         System.out.println(score);
         difficulty = score / 10 + 1;
-        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
-            dangerZones.add(new DangerZone(
-                random.nextInt(700), 
-                random.nextInt(800), 
-                random.nextInt(400) + 50, 
-                random.nextInt(400) + 50, 
-                new Color(255, 0, 0),
-                240));
-        }
+        callDangerZones();
         for (DangerZone dz : this.dangerZones) {
             dz.setTime(dz.getTime() - 1);
             dz.correctState();
@@ -95,6 +87,12 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             this.playerCharecter,
             this.playingField);
         this.playingField.redrawPanel(playerCharecter, dangerZones);
+    }
+
+    private void callDangerZones() {
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
+            dangerZones.add(new DZRed());
+        }
     }
 
     private ArrayList<DangerZone> copyAllBut(

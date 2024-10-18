@@ -2,12 +2,13 @@ import java.awt.Color;
 import java.util.Random;
 
 /**
- * Class fr the zones that the player must avoid.
+ * Class for the zones that the player must avoid.
  * It extends the class visual object to get 
  * its structure about the coordinate, size and color.
  */
 public class DangerZone extends VisibleObject {
 
+    private Color trueColor;
     private int time; //time is in frames; the game will run at ~60 FPS
     private int state; 
     /* state corresponds to what should happen with the object
@@ -22,6 +23,7 @@ public class DangerZone extends VisibleObject {
     */
     public DangerZone(int x, int y, int width, int height, Color color, int time) {
         super(x, y, width, height, color);
+        this.trueColor = color;
         this.state = 3;
         this.time = time + new Random().nextInt(91) - 45;
     }
@@ -37,9 +39,9 @@ public class DangerZone extends VisibleObject {
             // if there is more then 1.5 sec. before the object's time is up
             // it should be somewhat transparent.
             color = new Color(
-                color.getRed(),
-                color.getGreen(), 
-                color.getBlue(),
+                trueColor.getRed(),
+                trueColor.getGreen(), 
+                trueColor.getBlue(),
                  100);
             this.state = 3;
         } else if (this.time > 60) {
@@ -51,9 +53,9 @@ public class DangerZone extends VisibleObject {
             // if there is less than 1 sec before the object's time is up 
             // it should become completely opaque.
             this.color = new Color(
-                this.color.getRed(),
-                0,
-                0,
+                trueColor.getRed(),
+                trueColor.getGreen(), 
+                trueColor.getBlue(),
                  255);
             this.state = 1;
         } else {
@@ -62,15 +64,26 @@ public class DangerZone extends VisibleObject {
         }
     }
 
+    public void setVisuals() {}
+
     public void setTime(int time) {
         this.time = time;
+    }
+
+    public void setTrueColor(Color trueColor) {
+        this.trueColor = trueColor;
     }
 
     public int getState() {
         return this.state;
     }
+
+    public Color getTrueColor() {
+        return this.trueColor;
+    }
    
     public int getTime() {
         return this.time;
     }
+
 }
