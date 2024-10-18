@@ -15,7 +15,7 @@ public class DZBlue extends DangerZone {
         this.setY(player.getY() - random.nextInt(20));
         this.setWidth(player.getWidth() + random.nextInt(80));
         this.setHeight(player.getHeight() + random.nextInt(80));
-        this.setTrueColor(new Color(0, 0, 255));
+        this.setTrueColor(new Color(0, 0, 200));
         this.setTime(100 + random.nextInt(100));
     }
 

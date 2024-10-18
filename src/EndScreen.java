@@ -36,7 +36,6 @@ public class EndScreen extends JFrame {
             Color.BLUE, "Close");
         closeButton.setFont(new Font("Sans Serif", Font.BOLD, 24));
         closeButton.addActionListener((ActionEvent e) -> {
-            new StartMenu(700, 900);
             this.dispose();
         }); 
 
