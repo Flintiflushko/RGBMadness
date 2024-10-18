@@ -9,7 +9,7 @@ public class EndScreen extends JFrame {
     /**
      * Constructor for the end screen.
      */
-    EndScreen() {
+    public EndScreen() {
         this.getContentPane().setBackground(Color.BLACK);
         this.setSize(700, 900);
         this.setLayout(null);
