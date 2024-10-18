@@ -90,13 +90,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     }
 
     private void callDangerZones() {
-        if (dangerZones.size() < this.difficulty && dangerZones.size() < 5) {
-            switch (random.nextInt(4)) {
-                case 0 -> dangerZones.add(new DZRed());
-                case 1 -> dangerZones.add(new DZBlue(playerCharecter));
-                case 2 -> dangerZones.add(new DZGreen());
-                case 3 -> dangerZones.add(new DZPurple());
-            }
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
+            dangerZones.add(new DZRed());
         }
     }
 
