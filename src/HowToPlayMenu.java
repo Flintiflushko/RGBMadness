@@ -2,14 +2,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
+/**
+ * Class that generates a how-to-play menu.
+ */
 public class HowToPlayMenu extends JFrame {
+    private int dialogWidth = 500;
+    private int dialogHeight = 150;
 
-    int dialogWidth = 500;
-    int dialogHeight = 150;
-
-    HowToPlayMenu () {
+    /**
+     * Constructor for the how-to-play menu.
+     */
+    HowToPlayMenu() {
         this.getContentPane().setBackground(Color.BLACK);
-
         this.setSize(dialogWidth, dialogHeight);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
@@ -26,12 +30,9 @@ public class HowToPlayMenu extends JFrame {
         ImageIcon closeIcon = new ImageIcon("src/assets/vfx/exitIcon.jpg");
         
         JButton closeButton = new JButton();
-        
         closeButton.setPreferredSize(new Dimension(60, 60));
-        closeButton.setMaximumSize(new Dimension(60, 60));
         closeButton.setBorderPainted(false);
-        // closeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // closeButton.setIcon(closeIcon);
+
         if (closeIcon.getIconWidth() > 0) {
             closeButton.setIcon(closeIcon);
         } else {
@@ -45,9 +46,6 @@ public class HowToPlayMenu extends JFrame {
         this.add(closeButton);
         this.add(label);
         this.setVisible(true);
-
         this.setLocationRelativeTo(StartMenu.mainPanel);
-        
-        
     }
 }
