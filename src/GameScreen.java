@@ -14,7 +14,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private ArrayList<DangerZone> dangerZones = new ArrayList<>();
     private PlayerCharacter playerCharecter;
     private int difficulty;
-    private int score;
+    private static int score;
     private int speed;
     private boolean gameInProgress;
     private GamePanel playingField;
@@ -23,6 +23,10 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private final Random random = new Random();
     private boolean[] inputs;
     private MovementController moveControl = new MovementController();
+
+    public static int getScore() {
+        return score;
+    }
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
