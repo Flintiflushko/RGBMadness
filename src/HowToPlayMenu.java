@@ -40,6 +40,7 @@ public class HowToPlayMenu extends JFrame {
         }
 
         closeButton.addActionListener((ActionEvent e) -> {
+            new SoundManager().playClickSFX();
             this.dispose();
         }); 
         

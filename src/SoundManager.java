@@ -25,5 +25,16 @@ public class SoundManager {
         } catch (Exception e) {
         }
     }
+
+    public void playClickSFX() {
+        try {
+            File sfx = new File("src/assets/sfx/Click.wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(sfx);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.start();
+        } catch (Exception e) {
+        }
+    }
     
 }
