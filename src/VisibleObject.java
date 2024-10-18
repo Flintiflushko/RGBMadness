@@ -10,9 +10,6 @@ public class VisibleObject {
     protected int width;
     protected int height;
     protected Color color;
-    
-    
-    
 
     /**
      * Constructor for general use that takes in the x and y coordinate
@@ -26,8 +23,6 @@ public class VisibleObject {
         this.height = height;
         this.color = color;
     }
-
-    
 
     /**
     * The rest of the file is just getters and setters 
@@ -74,9 +69,7 @@ public class VisibleObject {
     public Color getColor() {
         return this.color;
     }
-
 }
-
 
  /* 
  * Here are all the sources of information that were used while creating this class.

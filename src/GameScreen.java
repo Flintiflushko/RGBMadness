@@ -37,7 +37,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
         this.textArea = new JPanel();
         this.score = 0;
-        this.speed = 5;
+        this.speed = 6;
         this.gameInProgress = true;
         this.inputs = new boolean[] {false, false, false, false};
    
@@ -66,15 +66,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void gameLoop() {
         System.out.println(score);
         difficulty = score / 10 + 1;
-        if (dangerZones.size() < this.difficulty && dangerZones.size() < 4) {
-            dangerZones.add(new DangerZone(
-                random.nextInt(700), 
-                random.nextInt(800), 
-                random.nextInt(400) + 50, 
-                random.nextInt(400) + 50, 
-                new Color(255, 0, 0),
-                240));
-        }
+        callDangerZones();
         for (DangerZone dz : this.dangerZones) {
             dz.setTime(dz.getTime() - 1);
             dz.correctState();
@@ -97,6 +89,17 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.playingField.redrawPanel(playerCharecter, dangerZones);
     }
 
+    private void callDangerZones() {
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 5) {
+            switch (random.nextInt(4)) {
+                case 0 -> dangerZones.add(new DZRed());
+                case 1 -> dangerZones.add(new DZBlue(playerCharecter));
+                case 2 -> dangerZones.add(new DZGreen());
+                case 3 -> dangerZones.add(new DZPurple());
+            }
+        }
+    }
+
     private ArrayList<DangerZone> copyAllBut(
         ArrayList<DangerZone> toCopy, 
         VisibleObject thingNotToCopy) {
@@ -113,7 +116,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      */
     public GameScreen(int width, int height) {
         setUp(width, height);
-        timer = new Timer(16, this);
+        timer = new Timer(13, this);
         timer.start();
     }
     
