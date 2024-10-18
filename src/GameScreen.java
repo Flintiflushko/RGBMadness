@@ -37,7 +37,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
         this.textArea = new JPanel();
         this.score = 0;
-        this.speed = 7;
+        this.speed = 6;
         this.gameInProgress = true;
         this.inputs = new boolean[] {false, false, false, false};
    
