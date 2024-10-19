@@ -23,6 +23,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private final Random random = new Random();
     private boolean[] inputs;
     private MovementController moveControl = new MovementController();
+    private SoundManager soundPlayer = new SoundManager();
 
     public static int getScore() {
         return score;
@@ -153,6 +154,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             gameLoop();
         } else {
             this.timer.stop();
+            soundPlayer.playGameOverSFX();
             this.dispose();
             new EndScreen().setVisible(true);
         }

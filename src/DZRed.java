@@ -13,8 +13,8 @@ public class DZRed extends DangerZone {
     public void setVisuals() {
         this.setX(random.nextInt(700));
         this.setY(random.nextInt(800));
-        this.setWidth(random.nextInt(400) + 50);
-        this.setHeight(random.nextInt(400) + 50);
+        this.setWidth(random.nextInt(400) + 150);
+        this.setHeight(random.nextInt(400) + 150);
         this.setTrueColor(new Color(200, 0, 0));
         this.setTime(240);
     }

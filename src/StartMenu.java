@@ -54,12 +54,15 @@ public class StartMenu extends JFrame {
 
         playButton.addActionListener((ActionEvent e) -> {
             this.dispose();
+            new SoundManager().playClickSFX();
             new GameScreen(800, 1000).setVisible(true);
         }); 
         htpButton.addActionListener((ActionEvent e) -> {
+            new SoundManager().playClickSFX();
             HowToPlayMenu menu = new HowToPlayMenu();
         });
         exitButton.addActionListener((ActionEvent e) -> {
+            new SoundManager().playClickSFX();
             this.dispose();
         });
     }
