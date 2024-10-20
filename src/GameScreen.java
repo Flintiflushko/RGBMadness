@@ -40,7 +40,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.score = 0;
         this.speed = 6;
         this.gameInProgress = true;
-        this.inputs = new boolean[] {false, false, false, false};
+        this.inputs = new boolean[] {false, false, false, false, false, false};
    
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,7 +66,10 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      */
     private void gameLoop() {
         System.out.println(score);
-        difficulty = score / 10 + 1;
+        difficulty = score / 5 + 1;
+        if(speed < 20){
+            speed = (score / 10) + 5;
+        }
         callDangerZones();
         for (DangerZone dz : this.dangerZones) {
             dz.setTime(dz.getTime() - 1);
@@ -91,7 +94,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     }
 
     private void callDangerZones() {
-        if (dangerZones.size() < this.difficulty && dangerZones.size() < 5) {
+        if (dangerZones.size() < this.difficulty && dangerZones.size() < 6) {
             switch (random.nextInt(4)) {
                 case 0 -> dangerZones.add(new DZRed());
                 case 1 -> dangerZones.add(new DZBlue(playerCharecter));
@@ -130,6 +133,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             case 'a' -> this.inputs[1] = true;
             case 's' -> this.inputs[2] = true;
             case 'd' -> this.inputs[3] = true;
+            case 'n' -> this.inputs[4] = true;
+            case 'm' -> this.inputs[5] = true;
         }
     }
 
@@ -139,7 +144,9 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             case 'w' -> this.inputs[0] = false;
             case 'a' -> this.inputs[1] = false;
             case 's' -> this.inputs[2] = false;
-            case 'd' -> this.inputs[3] = false;     
+            case 'd' -> this.inputs[3] = false;
+            case 'n' -> this.inputs[4] = false;     
+            case 'm' -> this.inputs[5] = false;
         }
     }
     

@@ -12,6 +12,7 @@ public class SoundManager {
             clip.open(audioStream);
             clip.start();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -23,6 +24,7 @@ public class SoundManager {
             clip.open(audioStream);
             clip.start();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -34,6 +36,7 @@ public class SoundManager {
             clip.open(audioStream);
             clip.start();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
