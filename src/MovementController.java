@@ -4,7 +4,7 @@ public class MovementController {
         boolean[] keysPressed,
         int speed, 
         PlayerCharacter playerCharecter,
-        GamePanel playingField ) {
+        GamePanel playingField) {
         if (keysPressed[4]) {
             //"Boost"
             speed = speed * 2;
