@@ -9,7 +9,7 @@ public class EndScreen extends JFrame {
     /**
      * Constructor for the end screen.
      */
-    public EndScreen() {
+    public EndScreen(int givenScore) {
         this.getContentPane().setBackground(Color.BLACK);
         this.setSize(700, 900);
         this.setLayout(null);
@@ -22,7 +22,7 @@ public class EndScreen extends JFrame {
         gameOver.setHorizontalAlignment(SwingConstants.CENTER);
         gameOver.setVisible(true);
 
-        JLabel score = new JLabel("Your score is: " + GameScreen.getScore());
+        JLabel score = new JLabel("Your score is: " + givenScore);
         score.setFont(new Font("Sans Serif", Font.BOLD, 30));
         score.setForeground(Color.GREEN);
         score.setBackground(Color.BLACK);
