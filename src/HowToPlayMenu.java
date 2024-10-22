@@ -6,7 +6,7 @@ import javax.swing.*;
  * Class that generates a how-to-play menu.
  */
 public class HowToPlayMenu extends JFrame {
-    private int dialogWidth = 500;
+    private int dialogWidth = 700;
     private int dialogHeight = 150;
 
     /**
@@ -16,12 +16,13 @@ public class HowToPlayMenu extends JFrame {
         this.getContentPane().setBackground(Color.BLACK);
         this.setSize(dialogWidth, dialogHeight);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-
+        this.setResizable(false);
 
         JLabel label = new JLabel();
         label.setText("<html><dive style = 'text-align: center;'>"
-            + "<font color='red'>Use wasd to move.</font><br>"
-            + "<font color='green'>Avoid obstacles to earn points.</font></html>");
+            + "<font color='red'>Use [w][a][s][d] to move.</font><br>"
+            + "<font color='green'>Use [n] and [m] to speed up or slow down.</font><br>"
+            + "<font color='blue'>Avoid obstacles to earn points.</font></html>");
         label.setFont(new Font("Sans Serif", Font.BOLD, 24));
         label.setForeground(Color.WHITE);
         label.setBackground(Color.BLACK);

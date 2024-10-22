@@ -18,16 +18,12 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private int speed;
     private boolean gameInProgress;
     private GamePanel playingField;
-    private JPanel textArea;
+    private ScoreGui textArea;
     private final Timer timer;
     private final Random random = new Random();
     private boolean[] inputs;
     private MovementController moveControl = new MovementController();
     private SoundManager soundPlayer = new SoundManager();
-
-    public static int getScore() {
-        return score;
-    }
 
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
@@ -36,7 +32,6 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void setUp(int width, int height) {
         playerCharecter = new PlayerCharacter(width / 2, height / 2, 40);
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
-        this.textArea = new JPanel();
         this.score = 0;
         this.speed = 6;
         this.gameInProgress = true;
@@ -50,12 +45,8 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
         this.setResizable(false);
         this.addKeyListener(this);
 
-        this.textArea.setSize(width, height / 10);
-        this.textArea.setBackground(Color.GRAY);
-        this.textArea.setLayout(null);
-        this.textArea.setVisible(true);
+        this.textArea = new ScoreGui(score, this.speed);
         this.add(textArea);
-        this.textArea.setLocation(0, 0);
 
         playingField = new GamePanel(playerCharecter, dangerZones);
         this.add(playingField);
@@ -65,11 +56,14 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
      * A methood that initiates the actual game.
      */
     private void gameLoop() {
-        System.out.println(score);
         difficulty = score / 5 + 1;
-        if(speed < 20){
+        if (speed < 20) {
             speed = (score / 10) + 5;
         }
+
+        textArea.updateScore(score);
+        textArea.updateSpeed(speed);
+
         callDangerZones();
         for (DangerZone dz : this.dangerZones) {
             dz.setTime(dz.getTime() - 1);
@@ -163,7 +157,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             this.timer.stop();
             soundPlayer.playGameOverSFX();
             this.dispose();
-            new EndScreen().setVisible(true);
+            new EndScreen(score).setVisible(true);
         }
     }
 }
