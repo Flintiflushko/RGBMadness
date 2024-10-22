@@ -25,10 +25,6 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private MovementController moveControl = new MovementController();
     private SoundManager soundPlayer = new SoundManager();
 
-    public static int getScore() {
-        return score;
-    }
-
     /**A methood that sets up the window in which the game will be played.
      * The methood takes the width, height and 2 panels which it manipulates
      * to make the initial look of the window.
