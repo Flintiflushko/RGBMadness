@@ -8,6 +8,7 @@ import java.util.Random;
  */
 public class DangerZone extends VisibleObject {
 
+    private SoundManager sfx;
     private Color trueColor;
     private int time; //time is in frames; the game will run at ~60 FPS
     private int state; 
@@ -26,6 +27,7 @@ public class DangerZone extends VisibleObject {
         this.trueColor = color;
         this.state = 3;
         this.time = time + new Random().nextInt(91) - 45;
+        this.sfx = new SoundManager();
     }
 
     /**
@@ -46,7 +48,10 @@ public class DangerZone extends VisibleObject {
             this.state = 3;
         } else if (this.time > 60) {
             // if there is 1 to 1.5 sec. before the object's time is up 
-            // it should blink in white and give out a sound effect. TODO
+            // it should blink in white and give out a sound effect.
+            if (this.time == 90) { 
+                sfx.playAttackSFX();
+            }
             this.color = new Color(255, 255, 255, 255);
             this.state = 2;
         } else if (this.time > 0) {

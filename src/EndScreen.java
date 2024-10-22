@@ -36,6 +36,7 @@ public class EndScreen extends JFrame {
             Color.BLUE, "Close");
         closeButton.setFont(new Font("Sans Serif", Font.BOLD, 24));
         closeButton.addActionListener((ActionEvent e) -> {
+            new SoundManager().playClickSFX();
             this.dispose();
         }); 
 
@@ -43,6 +44,7 @@ public class EndScreen extends JFrame {
             Color.GREEN, "New game");
         newGameButton.setFont(new Font("Arial", Font.BOLD, 24));
         newGameButton.addActionListener((ActionEvent e) -> {
+            new SoundManager().playClickSFX();
             new GameScreen(800, 1000);
             this.dispose();
         });
