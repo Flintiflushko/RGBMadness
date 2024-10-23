@@ -9,6 +9,6 @@
  */
 public class Main {
     public static void main(String[] args) {
-        StartMenu startMenu = new StartMenu(700, 900);
+        new StartMenu(700, 900);
     }
 }

@@ -1,9 +1,15 @@
 import java.awt.Color;
 import java.util.Random;
 
+/**
+ * Class for the green DZ.
+ */
 public class DZGreen extends DangerZone {
     private Random random = new Random();
     
+    /**
+     * Constructor for the class for the green DZ.
+     */
     public DZGreen() {
         super(0, 0, 0, 0, Color.MAGENTA, 0);
         setVisuals();

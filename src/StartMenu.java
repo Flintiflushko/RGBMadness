@@ -59,7 +59,7 @@ public class StartMenu extends JFrame {
         }); 
         htpButton.addActionListener((ActionEvent e) -> {
             new SoundManager().playClickSFX();
-            HowToPlayMenu menu = new HowToPlayMenu();
+            new HowToPlayMenu();
         });
         exitButton.addActionListener((ActionEvent e) -> {
             new SoundManager().playClickSFX();

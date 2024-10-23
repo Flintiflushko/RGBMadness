@@ -32,7 +32,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
     private void setUp(int width, int height) {
         playerCharecter = new PlayerCharacter(width / 2, height / 2, 40);
         this.playingField = new GamePanel(playerCharecter, this.dangerZones);
-        this.score = 0;
+        score = 0;
         this.speed = 6;
         this.gameInProgress = true;
         this.inputs = new boolean[] {false, false, false, false, false, false};
@@ -69,7 +69,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             dz.setTime(dz.getTime() - 1);
             dz.correctState();
             if (dz.getState() == 0) {
-                this.score++;
+                score++;
                 dangerZones = copyAllBut(dangerZones, dz);
             }
             if (this.dangerZones.isEmpty()) {
