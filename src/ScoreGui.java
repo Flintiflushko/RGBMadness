@@ -1,12 +1,19 @@
 import java.awt.*;
 import javax.swing.*;
  
-public class ScoreGui extends JPanel{
+/**
+ * A class for the top of the GameScreen where the 
+ * score and speed of the player is displayed.
+ */
+public class ScoreGui extends JPanel {
 
     private JLabel scoreLabel;
     private JLabel speedLabel;
 
-    ScoreGui(int score, int speed) {
+    /**
+     * A constructor that takes in the score and speed that should be displayed.
+     */
+    public ScoreGui(int score, int speed) {
         this.setSize(800, 100);
         this.setBackground(Color.GRAY);
         this.setLayout(null);
