@@ -1,5 +1,13 @@
+/**
+ * A class for the movement of the player.
+ */
 public class MovementController {
 
+    /**
+     * The method takes an array of boolean elements and based on that 
+     * determines what keys are pressed and how the cordinates of 
+     * the player should be changed.
+     */
     public void movePlayer (
         boolean[] keysPressed,
         int speed, 
