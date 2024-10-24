@@ -32,7 +32,7 @@ public class EndScreen extends JFrame {
 
         int buttonWidth = 350;
         int buttonHeight = 90;
-        MainMenuButton closeButton = new MainMenuButton(buttonWidth, buttonHeight,
+        CustomButton closeButton = new CustomButton(buttonWidth, buttonHeight,
             Color.BLUE, "Close");
         closeButton.setFont(new Font("Sans Serif", Font.BOLD, 24));
         closeButton.addActionListener((ActionEvent e) -> {
@@ -40,7 +40,7 @@ public class EndScreen extends JFrame {
             this.dispose();
         }); 
 
-        MainMenuButton newGameButton = new MainMenuButton(buttonWidth, buttonHeight, 
+        CustomButton newGameButton = new CustomButton(buttonWidth, buttonHeight, 
             Color.GREEN, "New game");
         newGameButton.setFont(new Font("Arial", Font.BOLD, 24));
         newGameButton.addActionListener((ActionEvent e) -> {
