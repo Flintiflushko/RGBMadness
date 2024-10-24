@@ -34,13 +34,13 @@ public class StartMenu extends JFrame {
         ImagePanel image = new ImagePanel(buttonStartY);
         mainPanel.add(image);
 
-        MainMenuButton playButton = new MainMenuButton(
+        CustomButton playButton = new CustomButton(
             buttonWidth, buttonHeight, Color.RED, "PLAY"
             );
-        MainMenuButton htpButton = new MainMenuButton(
+        CustomButton htpButton = new CustomButton(
             buttonWidth, buttonHeight, Color.GREEN, "HOW TO PLAY?"
             );
-        MainMenuButton exitButton = new MainMenuButton(
+        CustomButton exitButton = new CustomButton(
             buttonWidth, buttonHeight, Color.BLUE, "EXIT"
             );
 
