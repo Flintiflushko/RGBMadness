@@ -1,0 +1,36 @@
+RGB MADNESS:
+============|Get a basic understanding of Git & GitHub|=============
+
+- Create a repository and get used to using it             [CHECKED]
+
+=====================|Starting screen GUI|==========================
+
+- Create the starting screen with AWT.Swing                [CHECKED]
+
+- Add the functionality to buttons                         [4/4]
+ | Play button that starts the core game		   [CHECKED]
+ | Exit button that quits the game			   [CHECKED]
+ | "How to play" button					   [CHECKED]
+ | Use pre-drawn image for the logo			   [CHECKED]
+
+===========================|Core game|=============================
+
+- Create the window for the game                           [CHECKED]
+
+- Create the side GUI					   [CHECKED]
+
+- Create the panel where the actual gameplay will happen   [CHECKED]
+ 
+- Create the player's character 			   [CHECKED]
+
+- Add movement						   [CHECKED]
+
+- Create randomised obstacles and implement their 
+  functionality (lose condition) 			   [CHECKED]
+
+- Create losing screen                                     [CHECKED]
+
+==================================================================
+Topics of choice:
+-Git/Github
+-Advanced OOP

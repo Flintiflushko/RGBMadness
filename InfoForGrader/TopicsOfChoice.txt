@@ -1,0 +1,20 @@
+[Topic 1 - Advanced OOP]----------------------------------
+
+Adhere to the well established standards for OOP such as:
+The DRY principle and the SOLID principle.
+The code is split into separate classes with 
+individual goals in order to avoid repetition and dependancy.
+This helps the implementation of new features at a later time.
+
+
+[Topic 2 - Version control (Git/GitHub)]------------------
+
+Here is a link to the public GitHub repo.
+https://github.com/Flintiflushko/RGBMadness/network
+
+The method of working consisted of creating a new branch for 
+every small feature and merging when the feature was considered
+done.
+
+In the folder of THIS file you can see screenshots of the 
+repository branches.

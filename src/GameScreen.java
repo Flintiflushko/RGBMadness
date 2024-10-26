@@ -155,7 +155,7 @@ public class GameScreen extends JFrame implements KeyListener, ActionListener {
             this.timer.stop();
             soundPlayer.playGameOverSFX();
             this.dispose();
-            new EndScreen(score).setVisible(true);
+            new EndScreen(score);
         }
     }
 }
